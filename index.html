@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confession to Crush</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff7b7b, #ffafd4);
+            text-align: center;
+            padding: 50px;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+        .message {
+            font-size: 30px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .btn {
+            padding: 20px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            margin: 15px;
+            border: none;
+            border-radius: 30px;
+            transition: transform 0.2s ease, background-color 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .yes-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .yes-btn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        .no-btn {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+        }
+        .no-btn:hover {
+            background-color: #e53935;
+            transform: scale(1.05);
+        }
+        #bigMessage {
+    font-size: 55px;
+    color: black;  
+    font-weight: bold;
+    display: none;
+    margin-top: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+        .emoji {
+            position: absolute;
+            font-size: 35px;
+            animation: fall 3s infinite ease-in-out;
+        }
+        @keyframes fall {
+            0% { top: -30px; opacity: 1; }
+            100% { top: 100vh; opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="message">
+        Hi Crush, do you like me?
+    </div>
+    <button class="btn yes-btn" onclick="respond('Yes')">Yes</button>
+    <button class="btn no-btn" id="no-btn" onclick="moveAway()">No</button>
+
+    <div id="bigMessage">SUKA AKU SEKARANG!!!! 💖</div>
+
+    <script>
+        function respond(answer) {
+            if (answer === 'Yes') {
+                document.getElementById('bigMessage').style.display = 'block';  // Show the big message
+                document.getElementById('no-btn').style.display = 'none';  // Hide the "No" button
+                createLoveRain();  // Call function to create love emoji rain
+            }
+        }
+
+        function createLoveRain() {
+    const emojis = ['💖', '😍', '💋', '💌'];  // Array of emojis
+    const numberOfEmojis = 150;  // Number of emojis to fall
+    for (let i = 0; i < numberOfEmojis; i++) {
+        const emoji = document.createElement('div');
+        emoji.classList.add('emoji');
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];  // Randomly select an emoji
+        emoji.style.left = Math.random() * 100 + 'vw';  // Random horizontal position
+        emoji.style.animationDuration = (Math.random() * 4 + 5) + 's';  // Random falling speed
+        document.body.appendChild(emoji);
+
+        // Remove emoji after it falls off screen
+        setTimeout(() => {
+            emoji.remove();
+        }, 4000);
+    }
+}
+
+        const noButton = document.getElementById('no-btn');
+
+        // Function to move the button away from the mouse, without going outside the screen
+        noButton.addEventListener('mousemove', function() {
+            const buttonWidth = noButton.offsetWidth;
+            const buttonHeight = noButton.offsetHeight;
+
+            const randomX = Math.random() * (window.innerWidth - buttonWidth);
+            const randomY = Math.random() * (window.innerHeight - buttonHeight);
+
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+        });
+    </script>
+</body>
+</html>
